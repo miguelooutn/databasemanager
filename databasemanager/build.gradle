@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.library'
+    id 'maven'
 }
 
 android {
@@ -25,6 +26,16 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    task installArchives(type: Upload) {
+        description "Installs the artifacts to the local Maven repository."
+        repositories.mavenInstaller {
+            configuration = configurations.default
+            pom.groupId = 'miguelooutn'
+            pom.artifactId = 'databasemanager'
+            pom.version = '1.0.0'
+        }
     }
 }
 
